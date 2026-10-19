@@ -1,28 +1,546 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>올인원 마크다운 스크래치패드 &amp; 텍스트 유틸리티 - 점검 중</title>
-<meta name="robots" content="noindex, nofollow">
-<meta name="site-status" content="maintenance">
-<meta name="description" content="보안 점검을 위해 잠시 서비스를 멈췄습니다.">
+<title>올인원 마크다운 스크래치패드 &amp; 텍스트 유틸리티</title>
+<meta name="description" content="마크다운 실시간 미리보기, 텍스트 변환, 랜덤 조편성, 세계 시차 계산을 브라우저에서 안전하게 실행합니다.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://office-text-scratchpad.enjoy-onepage.com/">
+<meta name="theme-color" content="#1e1b4b">
+<link rel="icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="올인원 마크다운 스크래치패드">
+<meta property="og:title" content="올인원 마크다운 스크래치패드 &amp; 텍스트 유틸리티">
+<meta property="og:description" content="마크다운 실시간 미리보기, 텍스트 변환, 랜덤 조편성, 세계 시차 계산을 브라우저에서 안전하게 실행합니다.">
+<meta property="og:url" content="https://office-text-scratchpad.enjoy-onepage.com/">
+<meta property="og:image" content="https://office-text-scratchpad.enjoy-onepage.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="올인원 마크다운 스크래치패드 &amp; 텍스트 유틸리티">
+<meta name="twitter:description" content="마크다운 실시간 미리보기, 텍스트 변환, 랜덤 조편성, 세계 시차 계산을 브라우저에서 안전하게 실행합니다.">
+<meta name="twitter:image" content="https://office-text-scratchpad.enjoy-onepage.com/og-image.png">
+<link rel="alternate" type="application/rss+xml" title="마크다운 스크래치패드 RSS" href="https://office-text-scratchpad.enjoy-onepage.com/rss.xml">
+<link rel="sitemap" type="application/xml" href="https://office-text-scratchpad.enjoy-onepage.com/sitemap.xml">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://office-text-scratchpad.enjoy-onepage.com/#webapp",
+      "name": "올인원 마크다운 스크래치패드 & 텍스트 유틸리티",
+      "url": "https://office-text-scratchpad.enjoy-onepage.com/",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "All",
+      "inLanguage": "ko",
+      "description": "브라우저 로컬에서 안전하게 구동되는 마크다운 미리보기, 텍스트 케이스 변환, 암호학적 랜덤 조편성 및 세계 시차 계산기 툴킷입니다.",
+      "image": "https://office-text-scratchpad.enjoy-onepage.com/og-image.png",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "KRW" }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://office-text-scratchpad.enjoy-onepage.com/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "작성 중인 마크다운 메모는 안전하게 자동 저장되나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "네, 사용 중인 브라우저의 로컬 저장소(LocalStorage)에만 안전하게 보관됩니다. 새로고침을 하거나 창을 닫아도 복원되며, 외부 서버로는 단 1글자도 전송되지 않습니다. '내용 비우기'를 누르면 즉시 삭제되며 바로 되돌릴 수 있습니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "어떤 마크다운 문법이 지원되나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "제목(#~######), 굵게(**), 기울임(*), 취소선(~~), 인라인 코드 및 다중 행 코드 블록, 글머리 기호 목록, 번호 매기기 목록, 체크박스 작업 목록, 인용구(>), 구분선(---), 그리고 안전한 http/https 링크가 지원됩니다. 원본 HTML 태그는 모두 텍스트로 안전하게 변환되어 악성 스크립트 실행이 차단됩니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "랜덤 조편성은 조작 없이 공정하게 추첨되나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "웹 표준 암호화 난수 생성기(crypto.getRandomValues)와 검증된 Fisher-Yates 셔플 알고리즘을 사용하여 팀원 명단을 완벽하게 무작위 셔플한 뒤 각 팀에 순차 분배합니다. 모든 팀의 인원수 차이는 최대 1명 이내로 균등 배정됩니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "세계 시차 계산 시 썸머타임(서머타임)이 반영되나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "선택한 날짜와 시간에 맞춰 브라우저 내장 IANA 표준 시간대 데이터베이스를 조회하여 뉴욕(EDT/EST), 런던(BST/GMT) 등의 일광 절약 시간제 변동을 정확하게 자동 반영합니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "사내 기밀이나 회의 메모가 외부로 유출될 위험은 없나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "본 유틸리티는 100% 클라이언트 브라우저 메모리 안에서만 동작하는 순수 정적 웹앱입니다. 별도의 백엔드 데이터베이스나 외부 전송 API가 전혀 존재하지 않으므로 사내 보안 환경에서도 안심하고 사용할 수 있습니다."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+<!-- ADSENSE START: loader -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2228289204702106" crossorigin="anonymous"></script>
+<!-- ADSENSE END: loader -->
 <style>
-  body { margin: 0; font-family: system-ui, -apple-system, "Malgun Gothic", "Apple SD Gothic Neo", sans-serif; background: #f8fafc; color: #0f172a; }
-  main { max-width: 560px; margin: 12vh auto; padding: 32px 24px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; }
-  h1 { font-size: 1.35rem; margin: 0 0 12px; }
-  p { line-height: 1.7; color: #334155; }
-  a { color: #1d4ed8; font-weight: 600; }
-  .tag { display: inline-block; font-size: .8rem; font-weight: 700; color: #92400e; background: #fef3c7; border-radius: 999px; padding: 4px 10px; margin-bottom: 14px; }
+:root{--bg:#f5f5fb;--card:#fff;--ink:#1e1b4b;--muted:#4b5068;--line:#e0e0ef;--r:#b91c1c;--accent:#4338ca}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0;max-width:100%;overflow-x:hidden}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Malgun Gothic","Apple SD Gothic Neo",sans-serif;background:var(--bg);color:var(--ink);line-height:1.55}
+.header{background:linear-gradient(135deg,#1e1b4b,#3730a3);color:#fff;text-align:center;padding:26px 16px 22px}
+.header h1{margin:0;font-size:1.65rem;word-break:keep-all}
+.header-sub{margin-top:6px;font-size:.92rem;opacity:.92;word-break:keep-all}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.wrap{max-width:1080px;margin:0 auto;padding:12px 14px 8px}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:6px 0 14px}
+.tab{font:inherit;font-weight:700;border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:999px;padding:8px 14px;cursor:pointer;transition:background .15s,color .15s}
+.tab[aria-selected=true]{background:var(--accent);border-color:var(--accent);color:#fff}
+.grid2{display:grid;grid-template-columns:1fr;gap:14px}
+@media (min-width:1024px){.grid2{grid-template-columns:1fr 1fr;align-items:start}.result{position:sticky;top:12px}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 18px;margin:14px 0}
+.grid2 .card{margin:0}
+.card h2{font-size:1.15rem;margin:4px 0 10px}
+.lbl{display:block;font-weight:600;margin:10px 0 4px;font-size:.95rem}
+textarea{width:100%;min-height:240px;font:inherit;font-family:ui-monospace,SFMono-Regular,Consolas,"D2Coding",monospace;font-size:.95rem;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--ink);resize:vertical}
+input[type=text],input[type=datetime-local],select{width:100%;font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink)}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+.row>div{flex:1 1 150px;min-width:0}
+.btn{font:inherit;border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:10px;padding:8px 13px;cursor:pointer}
+.btn.sm{padding:4px 10px;font-size:.88rem;border-radius:8px}
+.btn.pri{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:700}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.err{color:var(--r);font-weight:600;margin:8px 0 0}
+.hint{font-size:.86rem;color:var(--muted);margin:6px 0}
+.stats{font-size:.88rem;color:var(--muted);font-variant-numeric:tabular-nums;margin:0 0 8px}
+.out{min-height:240px;max-height:520px;overflow:auto;border:1px solid var(--line);border-radius:12px;padding:10px 14px;background:#fff;overflow-wrap:anywhere}
+.out pre{background:#f4f4fa;border-radius:8px;padding:8px 10px;overflow:auto;white-space:pre-wrap}
+.out code{background:#f4f4fa;border-radius:4px;padding:0 3px;font-family:ui-monospace,Consolas,monospace}
+.out blockquote{border-left:3px solid var(--line);margin:8px 0;padding:2px 12px;color:var(--muted)}
+.out table{border-collapse:collapse}
+.teams{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.team{border:1px solid var(--line);border-radius:12px;padding:8px 12px}
+.team h3{font-size:.95rem;margin:2px 0 6px}
+.team ul{margin:0;padding-left:18px}
+.tz{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px dashed var(--line);flex-wrap:wrap}
+.tz:last-child{border-bottom:0}
+.tz b{font-variant-numeric:tabular-nums}
+.notice{border-color:#fcd34d;background:#fffbeb}
+.faq-item h3{font-size:1rem;margin:12px 0 4px}
+.faq-item p{margin:0;color:#373a52}
+.src{font-size:.82rem;color:var(--muted);word-break:keep-all}
+.ad-box{max-width:1080px;margin:10px auto;padding:0 14px;background:transparent;overflow:hidden;text-align:center}
+.ad-top ins{max-height:90px}
+.footer{text-align:center;font-size:.85rem;color:var(--muted);padding:18px 14px 28px}
+.footer a{color:var(--muted);text-decoration:none}
+.footer a:hover{text-decoration:underline}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#1e1b4b;color:#fff;padding:10px 18px;border-radius:999px;font-size:.9rem;opacity:0;pointer-events:none;transition:opacity .2s;z-index:50;max-width:90vw}
+.toast.show{opacity:1}
+@media (prefers-reduced-motion: reduce){.toast{transition:none}}
 </style>
 </head>
 <body>
-<main>
-  <span class="tag">점검 중</span>
+<header class="header">
   <h1>올인원 마크다운 스크래치패드 &amp; 텍스트 유틸리티</h1>
-  <p>보안 점검을 위해 이 도구를 잠시 멈췄습니다. 점검을 마치면 다시 열겠습니다.</p>
-  <p>이 점검 페이지는 브라우저에 저장된 메모를 지우지 않습니다.</p>
-  <p><a href="https://enjoy-onepage.com/">다른 무료 도구 보러 가기</a></p>
+  <div class="header-sub">실시간 마크다운 미리보기 · 대소문자 변환 · 스마트 조편성 · 세계 시차 계산</div>
+</header>
+
+<!-- ADSENSE START: top -->
+<div class="ad-box ad-top">
+  <ins class="adsbygoogle" style="display:block;height:60px;max-height:90px" data-ad-client="ca-pub-2228289204702106" data-ad-slot="3824727725" data-ad-format="horizontal" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+<!-- ADSENSE END: top -->
+
+<main class="wrap">
+  <div class="tabs" role="tablist" aria-label="기능 선택">
+    <button type="button" class="tab" role="tab" id="tab-md" aria-controls="p-md" aria-selected="true">마크다운 패드</button>
+    <button type="button" class="tab" role="tab" id="tab-case" aria-controls="p-case" aria-selected="false">텍스트 변환</button>
+    <button type="button" class="tab" role="tab" id="tab-team" aria-controls="p-team" aria-selected="false">랜덤 조편성</button>
+    <button type="button" class="tab" role="tab" id="tab-tz" aria-controls="p-tz" aria-selected="false">세계 시차 계산</button>
+  </div>
+  <div class="grid2">
+    <section class="card" aria-labelledby="in-h">
+      <h2 id="in-h">1. 내용 입력</h2>
+      <div id="p-md" role="tabpanel" aria-labelledby="tab-md">
+        <label class="lbl" for="md">마크다운 텍스트 (브라우저 자동 저장)</label>
+        <textarea id="md" spellcheck="false"></textarea>
+        <div class="actions">
+          <button type="button" class="btn sm" data-md="**|**">굵게</button>
+          <button type="button" class="btn sm" data-md="*|*">기울임</button>
+          <button type="button" class="btn sm" data-md="## |">제목</button>
+          <button type="button" class="btn sm" data-md="- |">목록</button>
+          <button type="button" class="btn sm" data-md="- [ ] |">할 일</button>
+          <button type="button" class="btn sm" data-md="`|`">코드</button>
+          <button type="button" class="btn sm" id="btn-clear">내용 비우기</button>
+          <button type="button" class="btn sm" id="btn-undo" hidden>실행 취소</button>
+        </div>
+      </div>
+      <div id="p-case" role="tabpanel" aria-labelledby="tab-case" hidden>
+        <label class="lbl" for="case-in">변환할 텍스트 (줄바꿈 구분)</label>
+        <textarea id="case-in" spellcheck="false" placeholder="예시:&#10;분기별 매출 보고서&#10;userAccountId"></textarea>
+        <label class="lbl" for="case-mode">변환 옵션 선택</label>
+        <select id="case-mode">
+          <option value="upper">대문자 (UPPERCASE)</option>
+          <option value="lower">소문자 (lowercase)</option>
+          <option value="title">단어 첫글자 대문자 (Title Case)</option>
+          <option value="sentence">문장 첫글자 대문자 (Sentence case)</option>
+          <option value="camel">카멜 표기법 (camelCase)</option>
+          <option value="pascal">파스칼 표기법 (PascalCase)</option>
+          <option value="snake">스네이크 표기법 (snake_case)</option>
+          <option value="kebab">케밥 표기법 (kebab-case)</option>
+          <option value="trim">빈 줄 제거 (Trim empty lines)</option>
+        </select>
+      </div>
+      <div id="p-team" role="tabpanel" aria-labelledby="tab-team" hidden>
+        <label class="lbl" for="names">참여자 명단 (줄바꿈 또는 쉼표 구분)</label>
+        <textarea id="names" spellcheck="false">김철수
+이영희
+박민준
+최지은
+정우성
+한지민</textarea>
+        <div class="row">
+          <div><label class="lbl" for="nteams">나눌 조(팀) 개수</label><input id="nteams" type="text" inputmode="numeric" maxlength="3" value="2"></div>
+          <div style="align-self:flex-end"><button type="button" class="btn pri" id="btn-teams">🎲 조 나누기</button></div>
+        </div>
+      </div>
+      <div id="p-tz" role="tabpanel" aria-labelledby="tab-tz" hidden>
+        <div class="row">
+          <div><label class="lbl" for="when">회의 및 미팅 일시</label><input id="when" type="datetime-local"></div>
+          <div><label class="lbl" for="zone">기준 시간대</label><select id="zone"></select></div>
+        </div>
+        <p class="hint">선택한 날짜의 IANA 표준 시간대 DB를 기반으로 현지 썸머타임(EDT/EST 등)을 자동 연산합니다.</p>
+      </div>
+      <p class="err" id="err" role="alert" hidden></p>
+    </section>
+
+    <section class="card result" aria-labelledby="out-h">
+      <h2 id="out-h">2. <span id="out-title">결과 미리보기</span></h2>
+      <p class="stats" id="stats"></p>
+      <div class="out" id="out" aria-live="off"></div>
+      <p class="sr-only" id="sr-status" aria-live="polite"></p>
+      <div class="actions">
+        <button type="button" class="btn" id="btn-copy">📋 결과 복사</button>
+        <button type="button" class="btn" id="btn-share">📤 공유하기</button>
+      </div>
+    </section>
+  </div>
+
+<!-- ADSENSE START: mid -->
+<div class="ad-box ad-mid">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2228289204702106" data-ad-slot="1186914926" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+<!-- ADSENSE END: mid -->
+
+  <section class="card" aria-labelledby="how-h">
+    <h2 id="how-h">🧮 핵심 원리 및 데이터 보안</h2>
+    <ul>
+      <li><strong>마크다운 파서:</strong> 입력 텍스트를 먼저 철저히 이스케이프한 뒤 제목, 강조, 코드, 목록, 인용구, 링크만 규격 렌더링하여 XSS 스크립트 실행을 원천 방어합니다.</li>
+      <li><strong>케이스 변환:</strong> 공백, 기호, 대소문자 전환 지점을 정규식으로 감지하여 프로그래밍 식별자 규격으로 정밀 변환합니다.</li>
+      <li><strong>암호학적 랜덤 셔플:</strong> <code>crypto.getRandomValues</code>를 활용한 Fisher-Yates 알고리즘으로 완전 무작위 공정 배정을 보장합니다.</li>
+      <li><strong>세계 시차 계산:</strong> 브라우저 내장 <code>Intl.DateTimeFormat</code> API와 IANA 데이터베이스를 연동해 썸머타임 전환(gap/overlap)까지 완벽 대응합니다.</li>
+      <li><strong>읽기 소요 시간:</strong> 한국어 묵독 기준 분당 500자(영문 238단어) 통계를 기준으로 소요 시간을 추정합니다.</li>
+    </ul>
+    <p class="src">데이터 보안 원칙: 모든 연산과 메모는 사용자 기기의 브라우저 내부에서만 실행되며 외부 서버로 절대 전송되지 않습니다.</p>
+  </section>
+
+  <section class="card" id="faq" aria-labelledby="faq-h">
+    <h2 id="faq-h">❓ 자주 묻는 질문 (FAQ)</h2>
+    <div class="faq-item"><h3>작성 중인 마크다운 메모는 안전하게 자동 저장되나요?</h3><p>네, 사용 중인 브라우저의 로컬 저장소(LocalStorage)에만 안전하게 보관됩니다. 새로고침을 하거나 창을 닫아도 복원되며, 외부 서버로는 단 1글자도 전송되지 않습니다. '내용 비우기'를 누르면 즉시 삭제되며 바로 되돌릴 수 있습니다.</p></div>
+    <div class="faq-item"><h3>어떤 마크다운 문법이 지원되나요?</h3><p>제목(#~######), 굵게(**), 기울임(*), 취소선(~~), 인라인 코드 및 다중 행 코드 블록, 글머리 기호 목록, 번호 매기기 목록, 체크박스 작업 목록, 인용구(>), 구분선(---), 그리고 안전한 http/https 링크가 지원됩니다. 원본 HTML 태그는 모두 텍스트로 안전하게 변환되어 악성 스크립트 실행이 차단됩니다.</p></div>
+    <div class="faq-item"><h3>랜덤 조편성은 조작 없이 공정하게 추첨되나요?</h3><p>웹 표준 암호화 난수 생성기(crypto.getRandomValues)와 검증된 Fisher-Yates 셔플 알고리즘을 사용하여 팀원 명단을 완벽하게 무작위 셔플한 뒤 각 팀에 순차 분배합니다. 모든 팀의 인원수 차이는 최대 1명 이내로 균등 배정됩니다.</p></div>
+    <div class="faq-item"><h3>세계 시차 계산 시 썸머타임(서머타임)이 반영되나요?</h3><p>선택한 날짜와 시간에 맞춰 브라우저 내장 IANA 표준 시간대 데이터베이스를 조회하여 뉴욕(EDT/EST), 런던(BST/GMT) 등의 일광 절약 시간제 변동을 정확하게 자동 반영합니다.</p></div>
+    <div class="faq-item"><h3>사내 기밀이나 회의 메모가 외부로 유출될 위험은 없나요?</h3><p>본 유틸리티는 100% 클라이언트 브라우저 메모리 안에서만 동작하는 순수 정적 웹앱입니다. 별도의 백엔드 데이터베이스나 외부 전송 API가 전혀 존재하지 않으므로 사내 보안 환경에서도 안심하고 사용할 수 있습니다.</p></div>
+  </section>
+
+  <section class="card notice" aria-labelledby="note-h">
+    <h2 id="note-h">⚠️ 이용 시 참고사항</h2>
+    <p>작성된 메모는 현재 사용 중인 브라우저 프로필에 저장되므로, 공용 PC에서는 작업 완료 후 '내용 비우기'를 눌러 개인정보를 보호해 주세요. 해외 회의 일정은 최종 초대장 발송 전 캘린더 앱과 재확인하시는 것을 권장합니다.</p>
+  </section>
 </main>
+
+<!-- ADSENSE START: bottom -->
+<div class="ad-box ad-bottom">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2228289204702106" data-ad-slot="3416334507" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+<!-- ADSENSE END: bottom -->
+
+<footer class="footer">
+  <p>무료 업무 생산성 스크래치패드 · 입력 데이터는 브라우저 내부에서만 안전하게 동작합니다.</p>
+  <p><a href="/privacy.html">개인정보처리방침</a> | <a href="/terms.html">이용약관</a> | <a href="/guides/guide.html">가이드북</a></p>
+</footer>
+
+<div id="global-ux-toast" class="toast" role="status" aria-live="polite"></div>
+
+<!-- LOGIC START -->
+<script>
+(function () {
+  'use strict';
+  var SITE = 'https://office-text-scratchpad.enjoy-onepage.com';
+  var TOOL_NAME = '올인원 마크다운 스크래치패드';
+  var KEY = 'officepad_kr_draft';
+  var WPM = 238;
+  var DEFAULT_DRAFT = '# 주간 업무 기획\n\n## 주요 목표\n- [ ] 런칭 체크리스트 최종 검토\n- [x] 팀 주간 회의 일정 예약\n\n## 메모\n왼쪽에 **마크다운**을 입력하면 실시간으로 오른쪽에서 안전하게 렌더링됩니다.';
+  var ZONES = [
+    ['Asia/Seoul', '서울 (한국)'],
+    ['America/New_York', '뉴욕 (미국 동부)'],
+    ['America/Chicago', '시카고 (미국 중부)'],
+    ['America/Denver', '덴버 (미국 산악)'],
+    ['America/Los_Angeles', '로스앤젤레스 (미국 서부)'],
+    ['Europe/London', '런던 (영국)'],
+    ['Europe/Paris', '파리 (유럽)'],
+    ['Asia/Tokyo', '도쿄 (일본)'],
+    ['Asia/Singapore', '싱가포르'],
+    ['Asia/Kolkata', '인도 (뉴델리)'],
+    ['Australia/Sydney', '시드니 (호주)'],
+    ['UTC', 'UTC (협정 세계시)']
+  ];
+  var tab = 'md', last = '', cleared = null, toastTimer = null, srTimer = null;
+  function $(id) { return document.getElementById(id); }
+  function on(id, ev, fn) { var el = $(id); if (el) el.addEventListener(ev, fn); }
+  function el(tag, text, cls) { var e = document.createElement(tag); if (text !== undefined) e.textContent = text; if (cls) e.className = cls; return e; }
+  function n(x) { return x.toLocaleString('ko-KR'); }
+  function err(msg) { var e = $('err'); e.hidden = !msg; e.textContent = msg || ''; }
+
+  /* ---------- safe markdown: escape first, then format ---------- */
+  function esc(s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;'); }
+  function inline(s) {
+    return esc(s).split(/(`[^`]+`)/).map(function (p) {
+      if (/^`[^`]+`$/.test(p)) return '<code>' + p.slice(1, -1) + '</code>';
+      return p.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" rel="noopener noreferrer nofollow" target="_blank">$1</a>')
+        .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+        .replace(/(^|[^*])\*([^*\s][^*]*)\*(?!\*)/g, '$1<em>$2</em>')
+        .replace(/~~([^~]+)~~/g, '<del>$1</del>');
+    }).join('');
+  }
+  function markdown(src) {
+    var lines = src.replace(/\r\n?/g, '\n').split('\n'), html = [], i = 0, para = [];
+    function flush() { if (para.length) { html.push('<p>' + para.map(inline).join(' ') + '</p>'); para = []; } }
+    while (i < lines.length) {
+      var ln = lines[i], m;
+      if (/^```/.test(ln)) {
+        flush(); var code = []; i++;
+        while (i < lines.length && !/^```/.test(lines[i])) code.push(lines[i++]);
+        i++; html.push('<pre><code>' + esc(code.join('\n')) + '</code></pre>'); continue;
+      }
+      if ((m = /^(#{1,6})\s+(.*)$/.exec(ln))) { flush(); html.push('<h' + m[1].length + '>' + inline(m[2]) + '</h' + m[1].length + '>'); i++; continue; }
+      if (/^\s*([-*_])(\s*\1){2,}\s*$/.test(ln)) { flush(); html.push('<hr>'); i++; continue; }
+      if (/^>\s?/.test(ln)) {
+        flush(); var q = [];
+        while (i < lines.length && /^>\s?/.test(lines[i])) q.push(lines[i++].replace(/^>\s?/, ''));
+        html.push('<blockquote>' + q.map(inline).join('<br>') + '</blockquote>'); continue;
+      }
+      if (/^\s*([-*+]|\d+[.)])\s+/.test(ln)) {
+        flush(); var ordered = /^\s*\d/.test(ln), items = [];
+        while (i < lines.length && /^\s*([-*+]|\d+[.)])\s+/.test(lines[i]) && /^\s*\d/.test(lines[i]) === ordered) {
+          var t = lines[i++].replace(/^\s*([-*+]|\d+[.)])\s+/, ''), box = /^\[( |x|X)\]\s+/.exec(t);
+          items.push('<li>' + (box ? (box[1] === ' ' ? '\u2610 ' : '\u2611 ') + inline(t.slice(box[0].length)) : inline(t)) + '</li>');
+        }
+        html.push((ordered ? '<ol>' : '<ul>') + items.join('') + (ordered ? '</ol>' : '</ul>')); continue;
+      }
+      if (!ln.trim()) { flush(); i++; continue; }
+      para.push(ln.trim()); i++;
+    }
+    flush();
+    return html.join('\n');
+  }
+  function stats(text) {
+    var chars = Array.from(text).length;
+    var words = text.trim() ? text.trim().split(/\s+/).length : 0;
+    var secs = Math.round(words / WPM * 60);
+    var read = secs < 60 ? secs + '초' : Math.floor(secs / 60) + '분' + (secs % 60 ? ' ' + (secs % 60) + '초' : '');
+    return n(chars) + '자 · ' + n(words) + '단어 · 예상 읽기 시간 약 ' + read;
+  }
+  function renderMd() {
+    var v = $('md').value;
+    try { localStorage.setItem(KEY, v); } catch (e) { /* storage blocked: preview still works */ }
+    $('out').innerHTML = v.trim() ? markdown(v) : '<p class="hint">마크다운을 입력하면 실시간으로 미리보기가 표시됩니다.</p>';
+    $('stats').textContent = stats(v);
+    last = v;
+  }
+
+  /* ---------- text case ---------- */
+  function getWords(s) { return s.replace(/([a-z0-9])([A-Z])/g, '$1 $2').replace(/([A-Z]+)([A-Z][a-z])/g, '$1 $2').split(/[^A-Za-z0-9가-힣]+/).filter(Boolean); }
+  function cap(w) { return w.charAt(0).toUpperCase() + w.slice(1).toLowerCase(); }
+  function convert(line, mode) {
+    if (mode === 'upper') return line.toUpperCase();
+    if (mode === 'lower') return line.toLowerCase();
+    if (mode === 'title') return line.toLowerCase().replace(/(^|[\s\-/(])([a-z])/g, function (a, b, c) { return b + c.toUpperCase(); });
+    if (mode === 'sentence') { var l = line.toLowerCase(); return l.replace(/^(\s*)([a-z])/, function (a, b, c) { return b + c.toUpperCase(); }); }
+    var w = getWords(line);
+    if (mode === 'camel') return w.map(function (x, i) { return i ? cap(x) : x.toLowerCase(); }).join('');
+    if (mode === 'pascal') return w.map(cap).join('');
+    if (mode === 'snake') return w.map(function (x) { return x.toLowerCase(); }).join('_');
+    return w.map(function (x) { return x.toLowerCase(); }).join('-');
+  }
+  function renderCase() {
+    var v = $('case-in').value, mode = $('case-mode').value, lines = v.replace(/\r\n?/g, '\n').split('\n');
+    var res = mode === 'trim' ? lines.filter(function (l) { return l.trim() !== ''; }).join('\n') : lines.map(function (l) { return convert(l, mode); }).join('\n');
+    var box = $('out'); box.textContent = '';
+    if (!v.trim()) { box.appendChild(el('p', '왼쪽에 변환할 텍스트를 입력하거나 붙여넣으세요.', 'hint')); last = ''; $('stats').textContent = ''; return; }
+    box.appendChild(el('pre', res));
+    $('stats').textContent = n(Array.from(res).length) + '자';
+    last = res;
+  }
+
+  /* ---------- random teams ---------- */
+  function randInt(max) {
+    var lim = Math.floor(4294967296 / max) * max, a = new Uint32Array(1);
+    do { crypto.getRandomValues(a); } while (a[0] >= lim);
+    return a[0] % max;
+  }
+  function makeTeams() {
+    var names = $('names').value.split(/[\n,]+/).map(function (s) { return s.trim(); }).filter(Boolean);
+    var raw = $('nteams').value.trim(), k = /^\d+$/.test(raw) ? +raw : NaN;
+    if (!names.length) { err('참여자 이름을 1명 이상 입력해 주세요.'); return; }
+    if (!(k >= 1 && k <= 50)) { err('조(팀) 개수는 1에서 50 사이의 정수여야 합니다.'); return; }
+    if (k > names.length) { err('참여자 수(' + names.length + '명)보다 조 개수(' + k + '개)가 더 많습니다. 조 개수를 줄여주세요.'); return; }
+    err('');
+    var s = names.slice();
+    for (var i = s.length - 1; i > 0; i--) { var j = randInt(i + 1), t = s[i]; s[i] = s[j]; s[j] = t; }
+    var teams = [];
+    for (i = 0; i < k; i++) teams.push([]);
+    s.forEach(function (name, idx) { teams[idx % k].push(name); });
+    var box = $('out'), grid = el('div', undefined, 'teams'), lines = [];
+    box.textContent = '';
+    teams.forEach(function (tm, idx) {
+      var c = el('div', undefined, 'team'), ul = el('ul');
+      c.appendChild(el('h3', (idx + 1) + '조 (' + tm.length + '명)'));
+      tm.forEach(function (name) { ul.appendChild(el('li', name)); });
+      c.appendChild(ul); grid.appendChild(c);
+      lines.push((idx + 1) + '조: ' + tm.join(', '));
+    });
+    box.appendChild(grid);
+    $('stats').textContent = '총 ' + n(names.length) + '명 · ' + k + '개 조 편성 완료';
+    last = lines.join('\n');
+  }
+
+  /* ---------- time zones ---------- */
+  var FMT = {};
+  function parts(t, tz) {
+    var f = FMT[tz] || (FMT[tz] = new Intl.DateTimeFormat('ko-KR', { timeZone: tz, hourCycle: 'h23', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' }));
+    var o = {};
+    f.formatToParts(new Date(t)).forEach(function (p) { if (p.type !== 'literal') o[p.type] = +p.value; });
+    return o;
+  }
+  function wallUtc(p) { return Date.UTC(p.year, p.month - 1, p.day, p.hour % 24, p.minute); }
+  function offsetAt(t, tz) { return wallUtc(parts(t, tz)) - Math.floor(t / 60000) * 60000; }
+  function toInstant(y, mo, d, h, mi, tz) {
+    var want = Date.UTC(y, mo - 1, d, h, mi);
+    var a = want - offsetAt(want - 86400000, tz), b = want - offsetAt(want + 86400000, tz);
+    var okA = wallUtc(parts(a, tz)) === want, okB = wallUtc(parts(b, tz)) === want;
+    if (okA && okB) return a === b ? { t: a, note: '' } : { t: Math.min(a, b), note: 'overlap' };
+    if (okA || okB) return { t: okA ? a : b, note: '' };
+    return { t: Math.max(a, b), note: 'gap' };
+  }
+  function localZone() { try { return Intl.DateTimeFormat().resolvedOptions().timeZone || 'Asia/Seoul'; } catch (e) { return 'Asia/Seoul'; } }
+  function renderTz() {
+    var v = $('when').value, m = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})$/.exec(v), box = $('out');
+    box.textContent = '';
+    if (!m) { err('회의 일시를 선택해 주세요.'); last = ''; $('stats').textContent = ''; return; }
+    err('');
+    var tz = $('zone').value, r = toInstant(+m[1], +m[2], +m[3], +m[4], +m[5], tz), lines = [];
+    var zname = $('zone').options[$('zone').selectedIndex].text;
+    if (r.note === 'gap') box.appendChild(el('p', zname + '의 서머타임 시작으로 건너뛰는 시간대입니다. 변경 후 시각으로 표시됩니다.', 'err'));
+    if (r.note === 'overlap') box.appendChild(el('p', zname + '의 서머타임 종료로 1시간 중복되는 시간대입니다. 첫 번째 시각 기준으로 표시됩니다.', 'hint'));
+    var show = ZONES.slice(), me = localZone();
+    if (!show.some(function (z) { return z[0] === me; })) show.unshift([me, '내 접속 시간대 (' + me + ')']);
+    show.forEach(function (z) {
+      var s = new Date(r.t).toLocaleString('ko-KR', { timeZone: z[0], weekday: 'short', month: 'numeric', day: 'numeric', hour: 'numeric', minute: '2-digit', timeZoneName: 'short' });
+      var row = el('div', undefined, 'tz');
+      row.appendChild(el('span', z[1] + (z[0] === me ? ' (현재 위치)' : '')));
+      row.appendChild(el('b', s));
+      box.appendChild(row);
+      lines.push(z[1] + ': ' + s);
+    });
+    $('stats').textContent = '기준 시간대: ' + zname;
+    last = lines.join('\n');
+  }
+
+  /* ---------- tabs, copy, share ---------- */
+  var TITLES = { md: '결과 미리보기', 'case': '변환된 텍스트', team: '편성된 조 목록', tz: '주요 도시별 현지 시각' };
+  function show(t) {
+    tab = t; err('');
+    ['md', 'case', 'team', 'tz'].forEach(function (k) { $('p-' + k).hidden = k !== t; $('tab-' + k).setAttribute('aria-selected', k === t ? 'true' : 'false'); });
+    $('out-title').textContent = TITLES[t];
+    if (t === 'md') renderMd(); else if (t === 'case') renderCase(); else if (t === 'tz') renderTz();
+    else { $('out').textContent = ''; $('out').appendChild(el('p', '참여자 명단을 입력한 후 조 나누기 버튼을 누르세요.', 'hint')); $('stats').textContent = ''; last = ''; }
+  }
+  function showToastNotification(msg) {
+    var t = $('global-ux-toast'); if (!t) return;
+    t.textContent = msg; t.classList.add('show');
+    clearTimeout(toastTimer); toastTimer = setTimeout(function () { t.classList.remove('show'); }, 2200);
+  }
+  function fallbackCopy(text) {
+    var ta = document.createElement('textarea'); ta.value = text; ta.setAttribute('readonly', '');
+    ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select();
+    var ok = false; try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+    document.body.removeChild(ta);
+    showToastNotification(ok ? '클립보드에 복사되었습니다.' : '복사 실패: 텍스트를 직접 선택해 복사해 주세요.');
+  }
+  function copyText(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(function () { showToastNotification('클립보드에 복사되었습니다.'); }, function () { fallbackCopy(text); });
+    } else { fallbackCopy(text); }
+  }
+  function payload() { return last + '\n👉 ' + TOOL_NAME + ': ' + SITE + '/'; }
+  function announce(msg) { clearTimeout(srTimer); srTimer = setTimeout(function () { $('sr-status').textContent = msg; }, 1000); }
+
+  ['md', 'case', 'team', 'tz'].forEach(function (k) { on('tab-' + k, 'click', function () { show(k); }); });
+  on('md', 'input', function () { if (cleared !== null && $('md').value) { cleared = null; $('btn-undo').hidden = true; } renderMd(); announce('미리보기가 업데이트되었습니다.'); });
+  document.querySelectorAll('[data-md]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var pr = b.getAttribute('data-md').split('|'), ta = $('md'), s = ta.selectionStart, e = ta.selectionEnd, sel = ta.value.slice(s, e) || '텍스트';
+      ta.value = ta.value.slice(0, s) + pr[0] + sel + pr[1] + ta.value.slice(e);
+      ta.focus(); ta.setSelectionRange(s + pr[0].length, s + pr[0].length + sel.length); renderMd();
+    });
+  });
+  on('btn-clear', 'click', function () {
+    if (!$('md').value) return;
+    cleared = $('md').value; $('md').value = ''; $('btn-undo').hidden = false;
+    renderMd(); showToastNotification('내용이 비워졌습니다. 되돌리려면 실행 취소를 누르세요.');
+  });
+  on('btn-undo', 'click', function () { if (cleared === null) return; $('md').value = cleared; cleared = null; $('btn-undo').hidden = true; renderMd(); });
+  on('case-in', 'input', renderCase);
+  on('case-mode', 'change', renderCase);
+  on('btn-teams', 'click', makeTeams);
+  on('when', 'change', renderTz);
+  on('when', 'input', renderTz);
+  on('zone', 'change', renderTz);
+  on('btn-copy', 'click', function () { if (!last) { showToastNotification('복사할 내용이 없습니다.'); return; } copyText(payload()); });
+  on('btn-share', 'click', function () {
+    if (!last) { showToastNotification('공유할 내용이 없습니다.'); return; }
+    var text = payload();
+    if (navigator.share) { navigator.share({ title: TOOL_NAME, text: text, url: SITE + '/' }).catch(function (e) { if (!e || e.name !== 'AbortError') copyText(text); }); }
+    else { copyText(text); }
+  });
+
+  (function init() {
+    var me = localZone(), sel = $('zone'), mine = document.createElement('option');
+    mine.value = me; mine.textContent = '현재 시간대 (' + me.replace(/_/g, ' ') + ')'; sel.appendChild(mine);
+    ZONES.forEach(function (z) { if (z[0] !== me) { var o = document.createElement('option'); o.value = z[0]; o.textContent = z[1]; sel.appendChild(o); } });
+    var d = new Date(); d.setSeconds(0, 0); d.setMinutes(Math.ceil(d.getMinutes() / 30) * 30);
+    var p = parts(d.getTime(), me), pad = function (x) { return (x < 10 ? '0' : '') + x; };
+    $('when').value = p.year + '-' + pad(p.month) + '-' + pad(p.day) + 'T' + pad(p.hour % 24) + ':' + pad(p.minute);
+    var saved = null;
+    try { saved = localStorage.getItem(KEY); } catch (e) { saved = null; }
+    $('md').value = saved !== null ? saved : DEFAULT_DRAFT;
+    show('md');
+  })();
+})();
+</script>
+<!-- LOGIC END -->
 </body>
 </html>

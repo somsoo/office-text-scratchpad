@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>올인원 마크다운 스크래치패드 &amp; 텍스트 유틸리티</title>
+  <link>https://office-text-scratchpad.enjoy-onepage.com/</link>
+  <description>마크다운 실시간 미리보기, 텍스트 변환, 랜덤 조편성, 세계 시차 계산을 브라우저에서 안전하게 실행합니다.</description>
+  <language>ko-kr</language>
+  <atom:link href="https://office-text-scratchpad.enjoy-onepage.com/rss.xml" rel="self" type="application/rss+xml" />
+  <lastBuildDate>Mon, 19 Oct 2026 09:45:00 +0900</lastBuildDate>
+  <item>
+    <title>사무 생산성 텍스트 가이드북 | 올인원 마크다운 스크래치패드</title>
+    <link>https://office-text-scratchpad.enjoy-onepage.com/guides/guide.html</link>
+    <guid isPermaLink="true">https://office-text-scratchpad.enjoy-onepage.com/guides/guide.html</guid>
+    <description>현대 지식 노동자를 위한 무서버 텍스트 생산성 가이드.</description>
+    <pubDate>Mon, 19 Oct 2026 09:45:00 +0900</pubDate>
+  </item>
+  <item>
+    <title>개인정보처리방침 | 올인원 마크다운 스크래치패드</title>
+    <link>https://office-text-scratchpad.enjoy-onepage.com/privacy.html</link>
+    <guid isPermaLink="true">https://office-text-scratchpad.enjoy-onepage.com/privacy.html</guid>
+    <description>올인원 마크다운 스크래치패드의 개인정보처리방침입니다.</description>
+    <pubDate>Mon, 19 Oct 2026 09:45:00 +0900</pubDate>
+  </item>
+  <item>
+    <title>이용약관 | 올인원 마크다운 스크래치패드</title>
+    <link>https://office-text-scratchpad.enjoy-onepage.com/terms.html</link>
+    <guid isPermaLink="true">https://office-text-scratchpad.enjoy-onepage.com/terms.html</guid>
+    <description>올인원 마크다운 스크래치패드의 서비스 이용약관입니다.</description>
+    <pubDate>Mon, 19 Oct 2026 09:45:00 +0900</pubDate>
+  </item>
+</channel>
+</rss>
